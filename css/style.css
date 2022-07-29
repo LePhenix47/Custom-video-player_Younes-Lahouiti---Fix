@@ -1,0 +1,234 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: 300;
+  overflow-x: hidden;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+a:visited {
+  color: black;
+}
+
+.main {
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.main__title {
+  margin-bottom: 50px;
+  font-weight: lighter;
+}
+.main__span {
+  color: rgb(110, 110, 110);
+  font-weight: bold;
+}
+.main__video {
+  overflow: hidden;
+  width: 75vw;
+  box-shadow: 0 5px 10px grey;
+}
+@media screen and (max-width: 768px) {
+  .main__video {
+    width: 95vw;
+  }
+}
+.main__video-container {
+  position: relative;
+  overflow: hidden;
+}
+.main__video-container:hover .video-controls {
+  transform: translateY(10%);
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.video-controls {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  overflow-x: hidden;
+  transition: transform 500ms ease-in-out;
+  transform: translateY(100%);
+  bottom: 4px;
+  width: 100%;
+}
+.video-controls__play-buttons {
+  margin-left: 10px;
+}
+.video-controls__pause-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__pause-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__pause-button:active {
+  cursor: pointer;
+}
+.video-controls__resume-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__resume-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__resume-button:active {
+  cursor: pointer;
+}
+.video-controls__volume-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__volume-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__volume-button:active {
+  cursor: pointer;
+}
+.video-controls__mute-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__mute-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__mute-button:active {
+  cursor: pointer;
+}
+.video-controls__buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.video-controls__video-timestamp-bar {
+  background-color: grey;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(100%);
+  transform-origin: left;
+}
+.video-controls__video-timestamp-bar-progress {
+  width: 100%;
+  background-color: rgb(62, 58, 160);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5px;
+  transform: scaleX(0%);
+  transform-origin: left;
+}
+.video-controls__video-timestamp {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+  font-variant-numeric: tabular-nums;
+}
+.video-controls__video-timestamp:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__video-timestamp:active {
+  cursor: pointer;
+}
+.video-controls__volume-container {
+  display: flex;
+  align-items: center;
+}
+.video-controls__volume-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__volume-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__volume-button:active {
+  cursor: pointer;
+}
+.video-controls__volume-bar {
+  height: 4px;
+}
+@media screen and (max-width: 768px) {
+  .video-controls__volume-bar {
+    width: 70px;
+    margin-left: 5px;
+  }
+}
+.video-controls__fullscreen-container {
+  margin-right: 10px;
+}
+.video-controls__fullscreen-button {
+  background: none;
+  color: white;
+  margin: 2px;
+  border: none;
+}
+.video-controls__fullscreen-button:hover {
+  color: rgb(236, 236, 236);
+  cursor: pointer;
+  outline: 1px solid white;
+}
+.video-controls__fullscreen-button:active {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */

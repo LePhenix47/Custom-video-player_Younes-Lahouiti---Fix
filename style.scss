@@ -1,0 +1,245 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: 300;
+    overflow-x: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+
+    &:visited {
+        color: black;
+    }
+}
+
+@mixin center-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin center-flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin controls-style {
+    background: none;
+    color: white;
+    margin: 2px;
+    border: none;
+
+    &:hover {
+        color: rgb(236, 236, 236);
+        cursor: pointer;
+        outline: 1px solid white;
+    }
+
+    &:active {
+        cursor: pointer;
+    }
+}
+
+$breakpoints: (
+    mobile: 768px,
+    tablet: 992px,
+    laptop: 993px,
+    //Petit écran ordi
+    desktop: 1150px,
+    //Grand écran ordi
+);
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: map-get($breakpoints, mobile)) and (max-width: map-get($breakpoints, tablet)) {
+        @content;
+    }
+}
+
+@mixin laptop-only {
+    @media screen and (min-width: map-get($breakpoints, laptop)) and (max-width: map-get($breakpoints, desktop)) {
+        @content;
+    }
+}
+
+@mixin desktop-only {
+    @media screen and (min-width: map-get($breakpoints, desktop)) {
+        @content;
+    }
+}
+
+
+.main {
+    background-color: lightgrey;
+    @include center-flex-column;
+    height: 100vh;
+    width: 100vw;
+
+
+    &__title {
+        margin-bottom: 50px;
+        font-weight: lighter;
+    }
+
+    &__span {
+        color: rgb(110, 110, 110);
+        font-weight: bold;
+    }
+
+    &__video {
+        overflow: hidden;
+
+        @include mobile-only {
+            width: 95vw;
+        }
+
+        width: 75vw;
+        box-shadow: 0 5px 10px grey;
+    }
+
+    &__video-container {
+        position: relative;
+        overflow: hidden;
+
+        &:hover .video-controls {
+            transform: translateY(10%);
+        }
+    }
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.video-controls {
+    background-color: black;
+    @include center-flex-column;
+    position: absolute;
+    overflow-x: hidden;
+    transition: transform 500ms ease-in-out;
+    transform: translateY(calc(100%));
+    bottom: 4px;
+    width: 100%;
+
+
+
+    &__play-buttons {
+        margin-left: 10px
+    }
+
+
+    &__pause-button {
+        @include controls-style;
+    }
+
+    &__resume-button {
+        @include controls-style;
+
+
+    }
+
+    &__volume-button {
+        @include controls-style;
+
+    }
+
+    &__mute-button {
+        @include controls-style;
+    }
+
+    &__buttons-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__video-timestamp-bar {
+        &-progress {
+            width: 100%;
+            background-color: rgb(62 58 160);
+            @include center-flex;
+            height: 5px;
+            transform: scaleX(0%);
+            transform-origin: left;
+        }
+
+        background-color: grey;
+        height: 100%;
+        width: 100%;
+        transform: scaleX(100%);
+        transform-origin: left;
+
+
+    }
+
+    &__video-timestamp {
+        @include controls-style;
+        font-variant-numeric: tabular-nums;
+    }
+
+    // &__video-bar {
+    //     width: 100%;
+    //     color: red;
+    //     background-color: red;
+    // }
+
+    &__volume-container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__volume-button {
+        @include controls-style;
+    }
+
+    &__volume-bar {
+        height: 4px;
+
+        @include mobile-only {
+            width: 70px;
+            margin-left: 5px;
+        }
+    }
+
+    &__fullscreen-container {
+        margin-right: 10px;
+    }
+
+    &__fullscreen-button {
+        @include controls-style;
+    }
+}
