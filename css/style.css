@@ -1,3 +1,20 @@
+:root {
+  --body-bg-color:#d3d3d3;
+  --body-color:black;
+  --progress-bar-bg-color:#3e3aa0;
+  --span-color:#6e6e6e;
+  --video-shadow-color:grey;
+  --video-controls-bg-color:black;
+  --timestamp-bar-bg-color:grey;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color:#3c3c3c;
+    --body-color:white;
+    --span-color:#979a9a;
+  }
+}
 html {
   scroll-behavior: smooth;
 }
@@ -33,26 +50,28 @@ a:visited {
 }
 
 .main {
-  background-color: lightgrey;
+  transition: background-color 350ms ease-out, color 350ms ease-out;
+  background-color: var(--body-bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
+  color: var(--body-color);
 }
 .main__title {
   margin-bottom: 50px;
   font-weight: lighter;
 }
 .main__span {
-  color: rgb(110, 110, 110);
+  color: var(--span-color);
   font-weight: bold;
 }
 .main__video {
   overflow: hidden;
   width: 75vw;
-  box-shadow: 0 5px 10px grey;
+  box-shadow: 0 5px 10px var(--video-shadow-color);
 }
 @media screen and (max-width: 768px) {
   .main__video {
@@ -76,7 +95,7 @@ a:visited {
 }
 
 .video-controls {
-  background-color: black;
+  background-color: var(--video-controls-bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,7 +173,7 @@ a:visited {
   width: 100%;
 }
 .video-controls__video-timestamp-bar {
-  background-color: grey;
+  background-color: var(--timestamp-bar-bg-color);
   height: 100%;
   width: 100%;
   transform: scaleX(100%);
@@ -162,7 +181,7 @@ a:visited {
 }
 .video-controls__video-timestamp-bar-progress {
   width: 100%;
-  background-color: rgb(62, 58, 160);
+  background-color: var(--progress-bar-bg-color);
   display: flex;
   flex-direction: row;
   justify-content: center;
