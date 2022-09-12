@@ -1,3 +1,40 @@
+//SASS variables
+$body-bg-color: #d3d3d3;
+$body-color: black;
+$progress-bar-bg-color: #3e3aa0;
+$span-color: #6e6e6e;
+
+$video-shadow-color: grey;
+$video-controls-bg-color: black;
+$timestamp-bar-bg-color: grey;
+//CSS variables
+
+:root {
+    --body-bg-color:#{$body-bg-color};
+    --body-color:#{$body-color};
+    --progress-bar-bg-color:#{$progress-bar-bg-color};
+    --span-color:#{$span-color};
+
+    --video-shadow-color:#{$video-shadow-color};
+    --video-controls-bg-color:#{$video-controls-bg-color};
+    --timestamp-bar-bg-color:#{$timestamp-bar-bg-color};
+}
+
+
+@media (prefers-color-scheme: dark) {
+    //SASS variables
+    $body-bg-color: #3c3c3c;
+    $body-color: white;
+    $span-color: #979a9a;
+
+    //CSS variables
+    :root {
+        --body-bg-color:#{$body-bg-color};
+        --body-color:#{$body-color};
+        --span-color:#{$span-color};
+    }
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -8,6 +45,7 @@ body {
     font-weight: 300;
     overflow-x: hidden;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 
 *,
@@ -99,10 +137,14 @@ $breakpoints: (
 
 
 .main {
-    background-color: lightgrey;
+    transition:
+        background-color 350ms ease-out,
+        color 350ms ease-out;
+    background-color: var(--body-bg-color);
     @include center-flex-column;
     height: 100vh;
     width: 100vw;
+    color: var(--body-color);
 
 
     &__title {
@@ -111,7 +153,7 @@ $breakpoints: (
     }
 
     &__span {
-        color: rgb(110, 110, 110);
+        color: var(--span-color);
         font-weight: bold;
     }
 
@@ -123,7 +165,7 @@ $breakpoints: (
         }
 
         width: 75vw;
-        box-shadow: 0 5px 10px grey;
+        box-shadow: 0 5px 10px var(--video-shadow-color); //video-shadow-color grey
     }
 
     &__video-container {
@@ -145,12 +187,12 @@ $breakpoints: (
 }
 
 .video-controls {
-    background-color: black;
+    background-color: var(--video-controls-bg-color); //video-controls-bg-color black
     @include center-flex-column;
     position: absolute;
     overflow-x: hidden;
     transition: transform 500ms ease-in-out;
-    transform: translateY(calc(100%));
+    transform: translateY(100%);
     bottom: 4px;
     width: 100%;
 
@@ -190,14 +232,14 @@ $breakpoints: (
     &__video-timestamp-bar {
         &-progress {
             width: 100%;
-            background-color: rgb(62 58 160);
+            background-color: var(--progress-bar-bg-color);
             @include center-flex;
             height: 5px;
             transform: scaleX(0%);
             transform-origin: left;
         }
 
-        background-color: grey;
+        background-color: var(--timestamp-bar-bg-color); //timestamp-bar-bg-color: grey
         height: 100%;
         width: 100%;
         transform: scaleX(100%);
