@@ -20,7 +20,7 @@ $timestamp-bar-bg-color: grey;
     --timestamp-bar-bg-color:#{$timestamp-bar-bg-color};
 }
 
-
+//Dark theme
 @media (prefers-color-scheme: dark) {
     //SASS variables
     $body-bg-color: #3c3c3c;
@@ -56,33 +56,23 @@ body {
     padding: 0;
 }
 
-ul {
-    list-style-type: none;
-    padding-left: 0px;
-    margin-left: 0px;
-}
 
-a {
-    text-decoration: none;
-    color: black;
 
-    &:visited {
-        color: black;
-    }
-}
 
-@mixin center-flex {
+@mixin center-flex($gap: 0px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: $gap;
 }
 
-@mixin center-flex-column {
+@mixin center-flex-column($gap: 0px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: $gap;
 }
 
 @mixin controls-style {
@@ -102,15 +92,16 @@ a {
     }
 }
 
+//Maps
 $breakpoints: (
     mobile: 768px,
     tablet: 992px,
     laptop: 993px,
-    //Petit écran ordi
     desktop: 1150px,
-    //Grand écran ordi
 );
 
+
+//Mixin
 @mixin mobile-only {
     @media screen and (max-width: map-get($breakpoints, mobile)) {
         @content;
@@ -135,7 +126,18 @@ $breakpoints: (
     }
 }
 
+//Keyframes
+@keyframes loadingVideoSkeleton {
+    from {
+        background-color: rgb(174, 174, 174);
+    }
 
+    to {
+        background-color: rgba(174, 174, 174, 0.3);
+    }
+}
+
+//SASS Styles
 .main {
     transition:
         background-color 350ms ease-out,
@@ -164,16 +166,28 @@ $breakpoints: (
             width: 95vw;
         }
 
-        width: 75vw;
+        width: 100%;
         box-shadow: 0 5px 10px var(--video-shadow-color); //video-shadow-color grey
     }
 
     &__video-container {
         position: relative;
         overflow: hidden;
+        @include center-flex();
+        width: 75vw;
+
+        @include mobile-only {
+            width: 95vw;
+        }
+
+        animation-name: loadingVideoSkeleton;
+        animation-duration: 650ms;
+        animation-timing-function: ease-out;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
 
         &:hover .video-controls {
-            transform: translateY(10%);
+            transform: translateY(15%);
         }
     }
 }
