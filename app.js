@@ -10,12 +10,10 @@ const pauseButton = document.querySelector(".video-controls__pause-button");
 function playVideo() {
   if (video.paused) {
     video.play();
-    playButton.classList.replace("show", "hide");
-    pauseButton.classList.replace("hide", "show");
+    changeElement(playButton, pauseButton);
   } else {
     video.pause();
-    playButton.classList.replace("hide", "show");
-    pauseButton.classList.replace("show", "hide");
+    changeElement(pauseButton, playButton);
   }
 }
 
@@ -64,8 +62,7 @@ function formatValue(currentValue, totalValue, element) {
 
   if (video.ended) {
     console.log(video);
-    playButton.classList.replace("hide", "show");
-    pauseButton.classList.replace("show", "hide");
+    changeElement(pauseButton, playButton);
   }
 }
 
@@ -87,16 +84,12 @@ const muteButton = document.querySelector(".video-controls__mute-button");
 const volumeButton = document.querySelector(".video-controls__volume-button");
 
 function handleMute() {
-  console.log("click");
-
   if (video.muted) {
     video.muted = false;
-    volumeButton.classList.replace("hide", "show");
-    muteButton.classList.replace("show", "hide");
+    changeElement(muteButton, volumeButton);
   } else {
     video.muted = true;
-    volumeButton.classList.replace("show", "hide");
-    muteButton.classList.replace("hide", "show");
+    changeElement(volumeButton, muteButton);
   }
 }
 
@@ -110,11 +103,11 @@ const volumeSlider = document.querySelector(".video-controls__volume-bar");
 function volumeChanger() {
   video.volume = volumeSlider.value / 100;
   if (video.volume === 0) {
-    volumeButton.classList.replace("show", "hide");
-    muteButton.classList.replace("hide", "show");
+    changeElement(volumeButton, muteButton);
+    video.muted = true;
   } else {
-    volumeButton.classList.replace("hide", "show");
-    muteButton.classList.replace("show", "hide");
+    video.muted = false;
+    changeElement(muteButton, volumeButton);
   }
 }
 
@@ -157,20 +150,43 @@ const fullscreenButton = document.querySelector(
   ".video-controls__fullscreen-button"
 );
 
-const exitFullscreenButton = document.querySelector(
-  ".video-controls__compress-button"
+const videoContainer = document.querySelector(".main__video-container");
+
+const enterFullscreenButton = document.querySelector(
+  ".video-controls__enter-fullscreen-button"
 );
 
-const videoContainer = document.querySelector(".main__video");
+const exitFullscreenButton = document.querySelector(
+  ".video-controls__exit-fullscreen-button"
+);
 
-function toggleFullscreen() {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
+//In order to enter on fullscreen you must use either the document or the container that contains the video
+function enterFullscreenOnClick() {
+  if (videoContainer.requestFullScreen) {
     videoContainer.requestFullscreen();
+    changeElement(enterFullscreenButton, exitFullscreenButton);
+  } else {
+    videoContainer.webkitRequestFullScreen();
+    changeElement(enterFullscreenButton, exitFullscreenButton);
   }
 }
 
-video.addEventListener("dblclick", toggleFullscreen);
-fullscreenButton.addEventListener("click", toggleFullscreen);
-exitFullscreenButton.addEventListener("click", toggleFullscreen);
+video.addEventListener("dblclick", enterFullscreenOnClick);
+enterFullscreenButton.addEventListener("click", enterFullscreenOnClick);
+exitFullscreenButton.addEventListener("click", exitFullscreenOnClick);
+
+//In order to exit you must use the document itself
+function exitFullscreenOnClick(e) {
+  console.log("click");
+  console.log(e);
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+  changeElement(exitFullscreenButton, enterFullscreenButton);
+}
+
+function changeElement(elementToBeHidden, elementToBeShown) {
+  elementToBeHidden.classList.replace("show", "hide");
+  elementToBeShown.classList.replace("hide", "show");
+}

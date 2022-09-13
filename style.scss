@@ -189,6 +189,14 @@ $breakpoints: (
         &:hover .video-controls {
             transform: translateY(15%);
         }
+
+        &:fullscreen {
+            animation-duration: 0ms;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            cursor: none;
+        }
     }
 }
 
@@ -295,7 +303,13 @@ $breakpoints: (
         margin-right: 10px;
     }
 
-    &__fullscreen-button {
+    &__enter-fullscreen-button {
         @include controls-style;
+
+    }
+
+    &__exit-fullscreen-button {
+        @include controls-style;
+
     }
 }
